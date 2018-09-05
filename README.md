@@ -235,6 +235,13 @@ To, access the reference
 To save data : `INDIPreferences.saveCustomArrayList(customs, "UNIQUE_STRING_KEY_TO_RETRIVE_DATA");` </br>
 To get data : `INDIPreferences.getCustomArrayList("UNIQUE_STRING_KEY_TO_RETRIVE_DATA");`
 
+### Contact me
+
+If you have any sugesstion or you have seen any error I would love to listen.</br>
+Jsut mail me at `mjdemon211@gmail.com` or `info.indilabz@gmail.com`.
+
+Thanks!!
+
 ### License
 
 Gson is released under the [Apache 2.0 license](LICENSE).
