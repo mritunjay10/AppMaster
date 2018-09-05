@@ -90,8 +90,9 @@ Now, for `INDIPreferences.java` which is a handler class for shared preferences.
 It will help you to access shared preferences without long and pathetic code.
 Look at the examples below:
     
-```
+
 Now, to save a String, int and boolean value you have to call the below functions:
+
 ```s
   INDIPreferences.saveString("Your value", "UNIQUE_STRING_KEY_TO_RETRIVE");
   INDIPreferences.saveInt(0, "UNIQUE_INT_KEY_TO_RETRIVE");
@@ -99,6 +100,7 @@ Now, to save a String, int and boolean value you have to call the below function
 
 ```
 And, to get stored data
+
 ```s
   INDIPreferences.getString("UNIQUE_STRING_KEY_TO_RETRIVE");
   INDIPreferences.getInt("UNIQUE_INT_KEY_TO_RETRIVE");
