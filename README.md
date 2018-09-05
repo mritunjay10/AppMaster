@@ -25,7 +25,7 @@ allprojects {
 Then add this line to module level build,gradle
 
 ```diff
-implementation 'com.github.Mritunjay10:AppMaster:v1.0'
+implementation 'com.github.Mritunjay10:AppMaster:v1.1'
 ```
 
 The completing `sync` add the following code in 'FileGenerator.java':
