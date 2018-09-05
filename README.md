@@ -257,4 +257,4 @@ limitations under the License.
 
 ### Disclaimer
 
-This is developed by Mritunjay (httP://indilabz.in).
+This is developed by Mritunjay (http://indilabz.in/).
