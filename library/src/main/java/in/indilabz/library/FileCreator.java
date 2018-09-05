@@ -10,6 +10,8 @@ public class FileCreator implements Data{
 
         OperationHelper.execute(PACKAGE, APP_NAME);
 
+        System.out.print(Data.PREFERENCES);
+
     }
 
 
