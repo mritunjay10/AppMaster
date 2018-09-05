@@ -5,6 +5,8 @@ AppMaster is a laibray for android which helps in creating some of the required 
 You can easiy create shared preferences and store data like ArrayList, float, int, string and etc.
 And to get the instance of a value which always remains constant try to declare them in the Constants.java.
 
+[![](https://jitpack.io/v/Mritunjay10/AppMaster.svg)](https://jitpack.io/#Mritunjay10/AppMaster)
+
 ## Usage
 
 First, create a new module by right clicking on app folder.
@@ -87,46 +89,6 @@ else, it will throw an error and application will keep crashing.
 Now, for `INDIPreferences.java` which is a handler class for shared preferences.
 It will help you to access shared preferences without long and pathetic code.
 Look at the examples below:
-
-```
-//// Add following lines to store and retrive boolean
-
-   public static void saveBoolean(boolean b, String key) {
-        SharedPreferences.Editor editor = getPreferences().edit();
-        editor.putBoolean(key, b);   /// Always change key while creating other funtion to store boolean
-        editor.commit();
-    }
-
-    public static boolean getBoolean(String key) {
-        SharedPreferences mSharedPreferences = getPreferences();
-        return mSharedPreferences.getBoolean(key, false);
-    }
-    
- //// Add following lines to store and retrive String
- 
-    public static void saveString(String value, String key) {
-        SharedPreferences.Editor editor = getPreferences().edit();
-        editor.putString(key, value);  /// Always change key while creating other funtion to store string
-        editor.commit();
-    }
-
-    public static String getString(String key) {
-        SharedPreferences mSharedPreferences = getPreferences();
-        return mSharedPreferences.getString(key, "");
-    }
-    
- //// Add following lines to store and retrive int
- 
-    public static void saveInt(int value, String key) {
-        SharedPreferences.Editor editor = getPreferences().edit();
-        editor.putString(key, value);  /// Always change key while creating other funtion to store int
-        editor.commit();
-    }
-
-    public static String getInt(String key) {
-        SharedPreferences mSharedPreferences = getPreferences();
-        return mSharedPreferences.getString(key, 0);
-    }   
     
 ```
 Now, to save a String, int and boolean value you have to call the below functions:
@@ -156,7 +118,7 @@ In order to save ArrayList<String>, ArrayList<~> or any list, you have to add th
 implementation 'com.google.code.gson:gson:2.8.5'
 ```
 
-Then add following function to store ArrayList<String>:
+Then add following function to `INDIPreferences.java` in order to store ArrayList<String>:
   
 ```S 
 public static void saveArrayListStrings(ArrayList<String> strings, String key) {
@@ -167,7 +129,7 @@ public static void saveArrayListStrings(ArrayList<String> strings, String key) {
     editor.commit();
  }
 ```
-To, get ArrayList<String>:
+To, get ArrayList<String> add folllowing function to `INDIPreferences.java`:
   
 ```S 
 public static ArrayList<String> getArrayListString(String key) {
