@@ -41,9 +41,60 @@ public interface Data {
                     "\n" +
                     "\n"+
                     "public class INDIPreferences implements Constants{\n" +
-                            "    \n" +
-                            "    private static SharedPreferences getPreferences() {\n" +
+                            "private static SharedPreferences getPreferences() {\n" +
                             "        return INDIMaster.applicationContext.getSharedPreferences(APP_NAME, Activity.MODE_PRIVATE);\n" +
+                            "    }\n" +
+                            "\n" +
+                            "    //// Add following lines to store and retrive boolean\n" +
+                            "\n" +
+                            "    public static void saveBoolean(boolean b, String key) {\n" +
+                            "        SharedPreferences.Editor editor = getPreferences().edit();\n" +
+                            "        editor.putBoolean(key, b);   /// Always change key while creating other funtion to store boolean\n" +
+                            "        editor.commit();\n" +
+                            "    }\n" +
+                            "\n" +
+                            "    public static boolean getBoolean(String key) {\n" +
+                            "        SharedPreferences mSharedPreferences = getPreferences();\n" +
+                            "        return mSharedPreferences.getBoolean(key, false);\n" +
+                            "    }\n" +
+                            "\n" +
+                            "    //// Add following lines to store and retrive String\n" +
+                            "\n" +
+                            "    public static void saveString(String value, String key) {\n" +
+                            "        SharedPreferences.Editor editor = getPreferences().edit();\n" +
+                            "        editor.putString(key, value);  /// Always change key while creating other funtion to store string\n" +
+                            "        editor.commit();\n" +
+                            "    }\n" +
+                            "\n" +
+                            "    public static String getString(String key) {\n" +
+                            "        SharedPreferences mSharedPreferences = getPreferences();\n" +
+                            "        return mSharedPreferences.getString(key, \"\");\n" +
+                            "    }\n" +
+                            "\n" +
+                            "    //// Add following lines to store and retrive int\n" +
+                            "\n" +
+                            "    public static void saveInt(int value, String key) {\n" +
+                            "        SharedPreferences.Editor editor = getPreferences().edit();\n" +
+                            "        editor.putInt(key, value);  /// Always change key while creating other funtion to store int\n" +
+                            "        editor.commit();\n" +
+                            "    }\n" +
+                            "\n" +
+                            "    public static int getInt(String key) {\n" +
+                            "        SharedPreferences mSharedPreferences = getPreferences();\n" +
+                            "        return mSharedPreferences.getInt(key, 0);\n" +
+                            "    }\n" +
+                            "\n" +
+                            "    //// Add following lines to store and retrive int\n" +
+                            "\n" +
+                            "    public static void saveFloat(Float value, String key) {\n" +
+                            "        SharedPreferences.Editor editor = getPreferences().edit();\n" +
+                            "        editor.putFloat(key, value);  /// Always change key while creating other funtion to store int\n" +
+                            "        editor.commit();\n" +
+                            "    }\n" +
+                            "\n" +
+                            "    public static Float getFloat(String key) {\n" +
+                            "        SharedPreferences mSharedPreferences = getPreferences();\n" +
+                            "        return mSharedPreferences.getFloat(key, 0);\n" +
                             "    }\n" +
                             "}";
 
