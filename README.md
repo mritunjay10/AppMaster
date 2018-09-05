@@ -7,177 +7,230 @@ And to get the instance of a value which always remains constant try to declare 
 
 ## Usage
 
-First, install `size-limit`:
+First, create a new module by right clicking on app folder.
+Then, select 'Android Library' and name the module 'generator'.
+After the module is created create a 'Java' file name 'FileGenerator.java'.
+
+Add this line to root folder of your build.gradle.
 
 ```sh
-$ npm install --save-dev size-limit
-```
-
-Add `size-limit` section to `package.json` and `size` script:
-
-```diff
-+ "size-limit": [
-+   {
-+     "path": "index.js"
-+   }
-+ ],
-  "scripts": {
-+   "size": "size-limit",
-    "test": "jest && eslint ."
-  }
-```
-
-The `path` option:
-
-* For an open source library, specify compiled sources, which will be published
-  to npm (usually the same value as the `main` field in the `package.json`);
-* For an application, specify a bundle file and use `webpack: false` (see the
-  [Applications](#applications) section).
-
-Here’s how you can get the size for your current project:
-
-```sh
-$ npm run size
-
-  Package size: 8.46 KB
-  With all dependencies, minified and gzipped
-
-```
-
-If your project size starts to look bloated,
-run [Webpack Bundle Analyzer](https://github.com/th0r/webpack-bundle-analyzer)
-
-for analysis:
-
-```sh
-$ npm run size -- --why
-```
-
-Now, let’s set the limit. Determine the current size of your library,
-add just a little bit (a kilobyte, maybe) and use that as a limit in
-your `package.json`:
-
-```diff
- "size-limit": [
-    {
-+     "limit": "9 KB",
-      "path": "index.js"
+allprojects {
+    repositories {      
+        maven { url 'https://jitpack.io' }
     }
- ],
+}
 ```
-
-Add the `size` script to your test suite:
+Then add this line to module level build,gradle
 
 ```diff
-  "scripts": {
-    "size": "size-limit",
--   "test": "jest && eslint ."
-+   "test": "jest && eslint . && npm run size"
-  }
+implementation 'com.github.Mritunjay10:AppMaster:v1.0'
 ```
 
-If you don’t have a continuous integration service running, don’t forget
-to add one — start with [Travis CI](https://github.com/dwyl/learn-travis).
+The completing `sync` add the following code in 'FileGenerator.java':
 
+```sh
+   public static void main(String[] args) {
 
-## Config
+        String PACKAGE = "YOUR_PACKAGE_NAME"; //present in manifest or build.gradle file
+        String APP_NAME = " \"YOUR_APP_NAME\" ";
 
-Size Limits supports 3 ways to define config.
-
-1. `size-limit` section to `package.json`:
-
-   ```json
-     "size-limit": [
-       {
-         "path": "index.js",
-         "limit": "9 KB"
-       }
-     ]
-   ```
-
-2. or separated `.size-limit` config file:
-
-   ```js
-   [
-     {
-       path: "index.js",
-       limit: "9 KB"
-     }
-   ]
-   ```
-
-3. or more flexible `.size-limit.js` config file:
-
-   ```js
-   module.exports = [
-     {
-       path: "index.js",
-       limit: "9 KB"
-     }
-   ]
-   ```
-
-Each section in config could have options:
-
-* **path**: relative paths to files. The only mandatory option.
-  It could be a path `"index.js"`, a pattern `"dist/app-*.js"`
-  or an array `["index.js", "dist/app-*.js"]`.
-* **limit**: size limit for files from `path` option. It should be a string
-  with a number and unit (`100 B`, `10 KB`, etc).
-* **name**: the name of this section. It will be useful only
-  if you have multiple sections.
-* **webpack**: with `false` will disable webpack.
-* **gzip**: with `false` will disable gzip compression.
-* **config**: a path to custom webpack config.
-* **ignore**: an array of files and dependencies to ignore from project size.
-
-
-## Applications
-
-Webpack inside Size Limit is very useful for small open source library.
-But if you want to use Size Limit for application, not open source library, you
-could already have webpack to make bundle.
-
-In this case you can disable internal webpack:
-
-```diff
- "size-limit": [
-    {
-      "limit": "300 KB",
-+     "webpack": false,
-      "path": "public/app-*.js"
+        OperationHelper.execute(PACKAGE, APP_NAME);
     }
- ],
 ```
 
+After adding the above lines click on the `FileGenerator.java` and press `Ctrl+Shift+F10`.
 
-## JavaScript API
+If the code finished with `exit code 0` voila you have just create the following files:
 
-```js
-const getSize = require('size-limit')
 
-const index = path.join(__dirname, 'index.js')
-const extra = path.join(__dirname, 'extra.js')
+```sh
+|───app  
+│
+|───helper
+│     |───INDIPreferences.java
+│   
+|───utils
+│     |───Constants.java
+|
+|───INDIMaster.java
+```
+Make sure after creating the folders you refract all the activity inside the `app` folder.
 
-getSize([index, extra]).then(size => {
-  if (size.gzip > 1 * 1024 * 1024) {
-    console.error('Project is now larger than 1MB!')
-  }
-})
+And change the appliction name to `.INDIMaster` in `manifest` file as shown below:
+
+```sh
+ <application
+        android:name=".INDIMaster"
+        ...
+```
+## How it works
+
+The function of `Constants.java` file is to store static String, float, int, array values, for e.g:
+```sh
+String APP_URL = 'http://www.your_url.com'; /// String is defined in Constants.java
+```
+And, to access the reference just add `implements Constants to any class`.
+
+Here, `INDIMaster` is a Application class which defines the overall properties of the application.
+In, `INDIMaster.java` I have already defined a function `getInstance()` which allows you to access the application context in
+the entire application just type `INDIMaster.getInstance()` and it will return you the application context.
+
+But, make sure to change the appliction name to `.INDIMaster` in `manifest` file as shown below:
+
+```sh
+ <application
+        android:name=".INDIMaster"
+        ...
+```
+else, it will throw an error and application will keep crashing.
+
+Now, for `INDIPreferences.java` which is a handler class for shared preferences.
+It will help you to access shared preferences without long and pathetic code.
+Look at the examples below:
+
+```
+//// Add following lines to store and retrive boolean
+
+   public static void saveBoolean(boolean b, String key) {
+        SharedPreferences.Editor editor = getPreferences().edit();
+        editor.putBoolean(key, b);   /// Always change key while creating other funtion to store boolean
+        editor.commit();
+    }
+
+    public static boolean getBoolean(String key) {
+        SharedPreferences mSharedPreferences = getPreferences();
+        return mSharedPreferences.getBoolean(key, false);
+    }
+    
+ //// Add following lines to store and retrive String
+ 
+    public static void saveString(String value, String key) {
+        SharedPreferences.Editor editor = getPreferences().edit();
+        editor.putString(key, value);  /// Always change key while creating other funtion to store string
+        editor.commit();
+    }
+
+    public static String getString(String key) {
+        SharedPreferences mSharedPreferences = getPreferences();
+        return mSharedPreferences.getString(key, "");
+    }
+    
+ //// Add following lines to store and retrive int
+ 
+    public static void saveInt(int value, String key) {
+        SharedPreferences.Editor editor = getPreferences().edit();
+        editor.putString(key, value);  /// Always change key while creating other funtion to store int
+        editor.commit();
+    }
+
+    public static String getInt(String key) {
+        SharedPreferences mSharedPreferences = getPreferences();
+        return mSharedPreferences.getString(key, 0);
+    }   
+    
+```
+Now, to save a String, int and boolean value you have to call the below functions:
+```s
+  INDIPreferences.saveString("Your value", "UNIQUE_STRING_KEY_TO_RETRIVE");
+  INDIPreferences.saveInt(0, "UNIQUE_INT_KEY_TO_RETRIVE");
+  INDIPreferences.saveBoolean(true, "UNIQUE_BOOLEAN_KEY_TO_RETRIVE");
+
+```
+And, to get stored data
+```s
+  INDIPreferences.getString("UNIQUE_STRING_KEY_TO_RETRIVE");
+  INDIPreferences.getInt("UNIQUE_INT_KEY_TO_RETRIVE");
+  INDIPreferences.getBoolean("UNIQUE_BOOLEAN_KEY_TO_RETRIVE");
+
+```
+For, better understanding of `'UNIQUE_STRING_KEY_TO_RETRIVE'` read shared preferences docs.
+
+Like, the above example you can save float, int, string as per your need.
+
+
+## Storing array list
+
+In order to save ArrayList<String>, ArrayList<~> or any list, you have to add the following lines in app level `build.gradle`:
+
+```S
+implementation 'com.google.code.gson:gson:2.8.5'
 ```
 
+Then add following function to store ArrayList<String>:
+  
+```S 
+public static void saveArrayListStrings(ArrayList<String> strings, String key) {
+    SharedPreferences.Editor editor = getPreferences().edit();
+    Gson gson = new Gson();
+    String jsonStrings = gson.toJson(strings);
+    editor.putString(key, jsonStrings);
+    editor.commit();
+ }
+```
+To, get ArrayList<String>:
+  
+```S 
+public static ArrayList<String> getArrayListString(String key) {
 
-## Comparison with `bundlesize`
+    SharedPreferences settings = getPreferences();
+    List<String> strings;
 
-Main difference between Size Limit and `bundlesize`, that Size Limit uses
-webpack to build bundle. It has more accurate result and can show you
-_what_ and _why_ causes the bloat.
+    if (settings.contains(key)) {
+        String jsonSt = settings.getString(key, null);
+        Gson gson = new Gson();
+        String[] st = gson.fromJson(jsonSt,
+                String[].class);
 
-1. Size Limit has the `--why` mode to run Webpack Bundle Analyzer — this way,
-   you can see what went wrong in a nice graphical representation.
-2. Instead of bundlesize, Size Limit prevents the most popular source
-   of libraries bloat — unexpected huge dependency.
-3. Also Size Limit prevents increasing library size because of wrong `process`
-   or `path` usage, when webpack will add big unnecessary polyfill.
-4. Size Limit runs only on first CI job, so it is more respectful
-   to CI resources.
+        strings = Arrays.asList(st);
+        strings = new ArrayList<String>(strings);
+        
+        } else
+            return null;
+
+        return (ArrayList<String>) strings;
+    }
+```
+To, access the reference 
+
+To save data : `INDIPreferences.saveArrayListStrings(customs, "UNIQUE_STRING_KEY_TO_RETRIVE_STRING_ARRAY_DATA");` </br>
+To get data : `INDIPreferences.getArrayListString("UNIQUE_STRING_KEY_TO_RETRIVE_STRING_ARRAY_DATA");`
+
+For, storing your custom model ArrayList:
+
+```S 
+public static void saveCustomArrayList(ArrayList<Custom> customs, String key) {
+    SharedPreferences.Editor editor = getPreferences().edit();
+    Gson gson = new Gson();
+    String jsonStrings = gson.toJson(customs);
+    editor.putString(key, jsonStrings);
+    editor.commit();
+ }
+```
+
+To, get custom model ArrayList:
+
+```S 
+public static ArrayList<Custom> getCustomArrayList(String key) {
+
+   SharedPreferences settings = getPreferences();
+   List<Custom> strings;
+
+    if (settings.contains(key)) {
+            String jsonSt = settings.getString(key, null);
+            Gson gson = new Gson();
+            Custom[] st = gson.fromJson(jsonSt,
+                    Custom[].class);
+
+            strings = Arrays.asList(st);
+            strings = new ArrayList<Custom>(strings);
+        } else
+            return null;
+
+        return (ArrayList<Custom>) strings;
+ }
+```
+
+To, access the reference 
+
+To save data : `INDIPreferences.saveCustomArrayList(customs, "UNIQUE_STRING_KEY_TO_RETRIVE_DATA");` </br>
+To get data : `INDIPreferences.getCustomArrayList("UNIQUE_STRING_KEY_TO_RETRIVE_DATA");`
