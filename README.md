@@ -206,6 +206,11 @@ Jsut mail me at `mjdemon211@gmail.com` or `info.indilabz@gmail.com`.
 
 Thanks!!
 
+### Donation
+If this project helps you in anyway, you can give me a cup of coffee :) 
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](mjdemon211@gmail.com)
+
 ### License
 
 Gson is released under the [Apache 2.0 license](LICENSE).
