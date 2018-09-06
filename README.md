@@ -159,7 +159,7 @@ To, access the reference
 To save data : `INDIPreferences.saveArrayListStrings(customs, "UNIQUE_STRING_KEY_TO_RETRIVE_STRING_ARRAY_DATA");` </br>
 To get data : `INDIPreferences.getArrayListString("UNIQUE_STRING_KEY_TO_RETRIVE_STRING_ARRAY_DATA");`
 
-For, storing your custom model ArrayList:
+For, storing your custom model ArrayList add following function to `INDIPreferences.java`:
 
 ```S 
 public static void saveCustomArrayList(ArrayList<Custom> customs, String key) {
@@ -171,7 +171,7 @@ public static void saveCustomArrayList(ArrayList<Custom> customs, String key) {
  }
 ```
 
-To, get custom model ArrayList:
+To, get custom model ArrayList add following function to `INDIPreferences.java`:
 
 ```S 
 public static ArrayList<Custom> getCustomArrayList(String key) {
