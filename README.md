@@ -209,9 +209,6 @@ Thanks!!
 ### Donation
 If this project helps you in anyway, you can give me a cup of coffee :) 
 
-##### Donation
-If this project helps you in anyway, you can give me a cup of coffee :) 
-
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](mjdemon211@gmail.com)
 
 ### License
